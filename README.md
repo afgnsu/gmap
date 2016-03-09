@@ -8,15 +8,16 @@
 5. rvm use 2.2.0@rails420
 6. gem i rails -v 4.2.0
 7. cd gmap
-8. bundle
-9. rake db:create db:migrate db:seed
-10. mysql -u root -p
+8. rm -rf Gemfile.lock
+9. bundle
+10. rake db:create db:migrate db:seed
+11. mysql -u root -p
  * use gmap_d;
  * source infos.sql;
  * source events.sql;
  * source shops.sql;
-11. rails s
-12. 以『管理者』帳號 a@a.a 和密碼 12345678 登入。
+12. rails s
+13. 以『管理者』帳號 a@a.a 和密碼 12345678 登入。
 
 ![Demo](https://github.com/afgnsu/gmap/blob/master/DEMO.png)
 ![Demo1](https://github.com/afgnsu/gmap/blob/master/DEMO1.png)
