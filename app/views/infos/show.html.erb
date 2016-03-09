@@ -1,0 +1,39 @@
+<div class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" datatoggle="collapse" data-target="#collapibleMenu"></button>
+    </div>
+
+  <div class='tab-content'>
+    <div class='tab-pane active' id='about'>
+
+      <div class='col-lg-6 col-md-12 col-xs-12'>
+        <table class='table table-hover'>
+          <tr><td nowrap><strong>店名</strong></td><td><%= @info.name %></td></tr>
+          <tr><td><strong>電話</strong></td><td><a href="tel:<%= @info.telphone %>"><%= @info.telphone %></a></td></tr>
+          <tr><td><strong>地址</strong></td><td><%= @info.address %></td></tr>
+          <tr><td><strong>介紹</strong></td><td><%= sanitize @info.note %></td></tr>
+          <tr><td><strong>網站</strong></td><td><%= link_to_if @info.website.present?, "<i class='fa fa-globe fa-2x'></i>".html_safe, @info.website, target: '_blank' %></td></tr>
+<tr><td><strong>導航</strong></td><td><%= gmap_link(@info.name,@info.latitude,@info.longitude) %></td></tr>
+        </table>
+      </div>
+
+      <div class='col-lg-6 col-md-12 col-xs-12'><%= show_pic(@info.photo.large) %></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<% if user_signed_in? %>
+<%# if can? :update, @info %>
+
+<%= link_to '新增', new_info_path, class: 'btn btn-lg btn-primary' %>&nbsp;&nbsp;
+
+<%= link_to '修改', edit_info_path(@info), class: 'btn btn-lg btn-warning' %>&nbsp;&nbsp;
+
+<%# if can? :destroy, @info %>
+<%= link_to '刪除', @info, method: :delete, data: { confirm: '確定要刪除？' }, class: 'btn btn-lg btn-danger' %>&nbsp;&nbsp;
+<% end %>
+
+<%= link_to '返回', infos_path, class: 'btn btn-lg btn-default' %>

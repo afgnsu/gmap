@@ -1,0 +1,70 @@
+    <div class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" datatoggle="collapse" data-target="#collapibleMenu">
+          </button>
+        </div>
+
+
+
+       <div class="panel with-nav-tabs panel-primary">
+         <div class="panel-heading">
+           <ul class="nav nav-tabs">
+             <h4 style='color: #FFF'><%= @shop.name %></h4>
+             <li class="active"><a href="#about" data-toggle="tab">關於</a></li>
+             <li><a href="#profile" data-toggle="tab">資訊</a></li>
+             <li><a href="#menu" data-toggle="tab">餐點</a></li>
+            <!--
+             <li class="dropdown">
+               <a href="#" data-toggle="dropdown">選單<span class="caret"></span></a>
+                 <ul class="dropdown-menu" role="menu">
+                    <li><a href="#menu1" data-toggle="tab">Menu 1</a></li>
+                    <li><a href="#menu2" data-toggle="tab">Menu 2</a></li>
+                 </ul>
+             </li>
+            -->
+           </ul>
+         </div>
+         </div>
+         </div>
+
+
+
+          <div class='tab-content'>
+            <div class='tab-pane active' id='about'>
+
+              <div class='col-lg-6 col-md-12 col-xs-12'>
+              <table class='table table-hover'>
+                <tr><td nowrap><strong>店名</strong></td><td><%= @shop.name %></td></tr>
+                <tr><td><strong>電話</strong></td><td><a href="tel:<%= @shop.telphone %>"><%= @shop.telphone %></a></td></tr>
+                <tr><td><strong>地址</strong></td><td><%= @shop.address.gsub('新竹縣','') %></td></tr>
+                <tr><td><strong>介紹</strong></td><td><%= @shop.content %></td></tr>
+                <tr><td><strong>網站</strong></td><td><%= link_to_if @shop.website.present?, "<i class='fa fa-globe fa-2x'></i>".html_safe, @shop.website, target: '_blank' %></td></tr>
+                <tr><td><strong>導航</strong></td><td><%= gmap_link(@shop.name,@shop.latitude,@shop.longitude) %></td></tr>
+              </table>
+              </div>
+
+              <div class='col-lg-6 col-md-12 col-xs-12'><%= show_pic(@shop.photo.large) %></div>
+
+            </div>
+            <div class='tab-pane' id='profile'><div class='col-lg-8 col-lg-offset-2 col-md-12 col-xs-12 img-responsive'><%= @shop.profile.present? ? "#{sanitize @shop.profile}".html_safe : "<h3 style='color: red;'>資料建構中！</h3>".html_safe %><br><br></div></div>
+            <div class='tab-pane' id='menu'><div class='col-lg-8 col-lg-offset-2'><%= @shop.menu.present? ? "#{sanitize @shop.menu}".html_safe : "<h3 style='color: red;'>資料建構中！</h3>".html_safe %><br><br></div></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+<%# if can? :update, @shop %>
+<% if user_signed_in? %>
+
+<%= link_to '新增', new_shop_path, class: 'btn btn-lg btn-primary' %>&nbsp;&nbsp;
+
+<%= link_to '修改', edit_shop_path(@shop), class: 'btn btn-lg btn-warning' %>&nbsp;&nbsp;
+
+<%# if can? :destroy, @shop %>
+  <%= link_to '刪除', @shop, method: :delete, data: { confirm: '確定要刪除？' }, class: 'btn btn-lg btn-danger' %>&nbsp;&nbsp;
+<% end %>
+
+<%= link_to '返回', shops_path, class: 'btn btn-lg btn-default' %>

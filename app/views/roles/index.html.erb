@@ -1,0 +1,36 @@
+<h1>權限列表</h1>
+
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>名稱</th>
+      <th>說明</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @roles.each do |role| %>
+      <tr>
+        <td><%= role.name %></td>
+        <td><%= role.description %></td>
+        <td><%= link_to '詳細', role, class: 'btn btn-xs btn-success' %>
+
+          <% if can? :update, role %>
+            <%= link_to '修改', edit_role_path(role), class: 'btn btn-xs btn-warning'%>
+          <% end %>
+
+          <% if can? :update, role %>
+            <%= link_to '刪除', role, method: :delete, data: { confirm: '確定要刪除？' }, class: 'btn btn-xs btn-danger'%>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% if can? :create, Role %>
+  <%= link_to '新增權限', new_role_path, class: 'btn btn-lg btn-primary' %>
+<% end %>

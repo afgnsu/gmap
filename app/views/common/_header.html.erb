@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="navbar navbar-inverse navbar-static-top" style='border-radius:5px;'>
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/"><i class='fa fa-sun-o'></i>&nbsp;光明商圈</a>
+        </div>
+
+          <ul class="nav navbar-nav text-nowrap">
+            <li><%= link_to "<i class='fa fa-cutlery'></i>美食".html_safe, shops_path %></li>
+            <li><%= link_to "<i class='fa fa-info-circle'></i>旅遊".html_safe, infos_path %></li>
+            <li><%= link_to "<i class='fa fa-star'></i>活動".html_safe, events_path %></li>
+            <!-- <li><%# link_to "<i class='fa fa-home'></i>首頁".html_safe, root_path %></li> -->
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <% unless user_signed_in? %>
+            <%# if !current_user %>
+            <!-- <li> <%# link_to("註冊", new_user_registration_path) %> </li> -->
+              <li> <%= link_to("<i class='fa fa-user'></i>管理".html_safe, new_user_session_path) %> </li>
+            <% else %>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Hi!, <%= current_user.name %>
+                <b class="caret"></b>
+                </a>
+                  <ul class="dropdown-menu">
+
+                    <% if can? :manage, Role %>
+                    <li> <%= link_to("權限管理", roles_path )%></li>
+                    <li> <%= link_to("用戶管理", users_path )%></li>
+                    <% end %>
+                    <li> <%= link_to("帳號設定", edit_user_registration_path )%></li>
+                    <li> <%= link_to("登出", destroy_user_session_path, method: :delete) %> </li>
+                  </ul>
+              </li>
+            <% end %>
+         </ul>
+
+         <form class="navbar-form navbar-right col-lg-3 col-md-6 col-xs-12" role="search" action='/search'>
+           <div class="form-inline">
+           <div class="form-group">
+             <input type="text" name='keyword' class="form-control" placeholder="請輸入店名或關鍵字">
+             &nbsp;
+             <button type="submit" class="btn btn-default">搜尋</button>
+           </div>
+           </div>
+         </form>
+
+    </div>
+</div>
+</div>

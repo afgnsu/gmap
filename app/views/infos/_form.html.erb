@@ -1,0 +1,30 @@
+<%= bootstrap_form_for(@info, layout: :horizontal, label_col: 'col-lg-3', control_col: 'col-lg-6') do |f| %>
+
+  <% if @info.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@info.errors.count, "error") %> prohibited this info from being saved:</h2>
+      <ul>
+      <% @info.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <%= f.text_field :name, label: '店名' %>
+    <%= f.text_field :telphone, label: '電話', placeholder: '範例：03-666-6666' %>
+    <%= f.text_field :address, label: '地址', placeholder: '範例：竹北市光明一路xx號' %>
+    備註：<%= f.kindeditor :note, label: '備註' %><hr>
+    <%= f.text_field :website, label: '網站', placeholder: '前面請加入 http://' %>
+    <%# f.text_field :latitude, label: '經度', placeholder: '會自動產生' %>
+    <%# f.text_field :longitude, label: '緯度', placeholder: '會自動產生' %>
+    <%= f.file_field :photo, label: '照片' %>
+    <%= f.hidden_field :photo_cache %>
+    <center>
+    <%= image_tag @info.photo.small if @info.photo? %>
+    <%= f.check_box :remove_photo, label: '刪除' %>
+    </center>
+
+    <%= f.submit '送出', class: 'btn btn-lg btn-primary col-lg-1 col-lg-offset-4' %>
+    <%= link_to '返回', infos_path, class: 'btn btn-lg btn-default col-lg-1 col-lg-offset-1' %>
+<% end %>

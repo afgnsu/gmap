@@ -1,0 +1,11 @@
+<h1>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa fa-cutlery'></i>&nbsp;美食資訊</h1>
+<div class="well sidebar-nav">
+    <ul class="nav nav-list">
+    <% @shops.each do |shop| %>
+        <li>
+          <%# link_to "<span style='text-align:center;'>#{shop.name[0,9]}</span><br> #{image_tag(shop.photo.small)}".html_safe, class: 'thumbnail' %>
+          <%= link_to "<div class='pic_cell thumbnail' style='width:100%;background:transparent url(#{shop.photo.small}) no-repeat right top;background-size: cover;'><div class='pic_title'><h4>&nbsp;&nbsp;#{shop.name[0,9]}</h4></div></div>".html_safe, shop %>
+        </li>
+    <% end %>
+    </ul>
+</div>

@@ -1,0 +1,14 @@
+<table class='table table-hover'>
+<tr><td nowrap><strong>活動餐廳</strong></td><td><h3><%= link_to @event.shop.name, shop_path(@event.shop), style: 'color:#095096;' %></h3></td></tr>
+<tr><td><strong>活動主題</strong></td><td><h3><%= @event.title %></h3></td></tr>
+<tr><td><strong>活動內容</strong></td><td><%= @event.content %></td></tr>
+<tr><td><strong>活動照片</strong></td><td><%= show_pic(@event.photo.large) %></td></tr>
+<tr><td><strong>截止日期</strong></td><td><%= @event.end %></td></tr>
+</table>
+
+<% if user_signed_in? %>
+<%= link_to '新增', new_event_path, class: 'btn btn-lg btn-primary' %>&nbsp;&nbsp;
+
+<%= link_to '修改', edit_event_path(@event), class: 'btn btn-lg btn-warning' %>&nbsp;
+<% end %>
+<%= link_to '返回', events_path, class: 'btn btn-lg btn-default' %>

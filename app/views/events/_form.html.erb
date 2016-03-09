@@ -1,0 +1,32 @@
+<%# form_for(@event) do |f| %>
+<%= bootstrap_form_for(@event, layout: :horizontal, label_col: 'col-lg-3', control_col: 'col-lg-6') do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <%= f.label :shop_id, '隸屬餐廳' %><br>
+    <%= collection_select(:event, :shop_id, Shop.all, :id, :name, {prompt: '請選擇'}) %>
+
+    <%= f.text_field :title, label: '標題' %>
+    <%= f.text_area :content, label: '內容', size: '15x10' %>
+
+    <%= f.file_field :photo, label: '照片' %>
+    <%= f.hidden_field :photo_cache %>
+    <center>
+    <%= image_tag @event.photo.small if @event.photo? %>
+    <%= f.check_box :remove_photo, label: '刪除' %>
+    </center>
+
+    <%= f.date_select :end, label: '活動截止日' %>
+
+    <%= f.submit '送出', class: 'btn btn-lg btn-primary col-lg-1 col-lg-offset-4' %>
+    <%= link_to '返回', events_path, class: 'btn btn-lg btn-default col-lg-1 col-lg-offset-1' %>
+<% end %>

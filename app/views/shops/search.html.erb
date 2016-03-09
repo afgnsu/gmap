@@ -1,0 +1,66 @@
+<div class='col-lg-12 col-md-12 col-xs-12'>
+<h1><i class='fa fa-cutlery'></i>&nbsp;美食餐廳列表</h1>
+
+<div class='table-responsive'>
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>店名</th>
+      <th>電話/地址</th>
+      <th>介紹</th>
+      <th nowrap>網站</th>
+      <th nowrap>導航</th>
+      <th>維護</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% if @shops.count == 0 %>
+    <%= "<tr><td colspan='6'><h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您查詢的關鍵字『<font color='red'>#{@keyword}</font>』找不到資料！請重新搜尋。</h3></td></tr>".html_safe %>
+    <% else %>
+
+    <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您查詢的關鍵字是『<font color='red'><%= @keyword %></font>』一共找到 <%= @shops.count %> 筆</h3>
+
+    <% @shops.each_with_index do |shop,index| %>
+      <tr>
+        <td><%= link_to shop.name[0,9], shop %></td>
+        <td><a href="tel:<%= shop.telphone %>"><%= shop.telphone %></a>
+          <br><%= shop.address %></td>
+
+        <!-- <td><%# truncate(shop.content, length: 44, ommision: '...') %></td> -->
+
+        <td><a class='detial-link' data-toggle='collapse' data-parent='#accordion' href="#collapse<%= index+1 %>">
+            <i class='fa fa-chevron-down fa-2x'></i></td>
+
+
+
+        <td align=center><%= link_to_if shop.website.present?, "<i class='fa fa-globe fa-2x'></i>".html_safe, shop.website, target: '_blank' %></td>
+        <td align=center><%= gmap_link(shop.name,shop.latitude,shop.longitude) %></td>
+        <td><%= link_to '修改', edit_shop_path(shop), class: 'btn btn-xs btn-warning' %>
+        <%= link_to '刪除', shop, method: :delete, data: { confirm: '確定要刪除？' }, class: 'btn btn-xs btn-danger' %></td>
+      </tr>
+
+
+      <tr id="collapse<%= index+1 %>" class='collapse'>
+        <td colspan=6 bgcolor='#FFFF99' style='padding: 10px;'><%= sanitize shop.content %></td>
+      </tr>
+
+
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+</div>
+</div>
+
+<br>
+
+<%= link_to '新增店家', new_shop_path, class: 'btn btn-lg btn-primary' %>
+
+<script type="text/javascript">
+buildMap(<%=raw @hash.to_json %>);
+</script>
+
+

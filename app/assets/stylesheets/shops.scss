@@ -1,0 +1,54 @@
+// Place all the styles related to the Shops controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+//.yellow { border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px; }
+//.yellow { border: 1px solid black; margin-top: 0px; color: black; background: #FFFF99; padding: 5px; }
+//.white { font-size: 17px; position: absolute; left: 1px; top: 1px; border-radius: 2px; height: 66px; background-color: rgb(255, 255, 255); }
+
+.yellow { border: 1px solid black; margin-top: 0px; color: black; background: #FFFF99; padding: 5px; }
+.dark   { border: 1px solid black; margin-top: 0px; color: white; background: black; padding: 1px; }
+.white  { border: 1px solid gray; margin-top: 0px; color: royalblue; background: #FFFFFF; padding: 3px; }
+
+
+
+.table > tr > td { vertical-align: middle; }
+
+.pic_cell {
+  min-height: 100px;
+  padding-top: 55px;
+  padding-bottom: 0rem;
+  margin-bottom: 0rem;
+  margin-top: 0rem;
+  width: 100%;
+}
+
+.pic_title {
+  background-color: rgba(255,255,255,0.7);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.form-control {
+    width: 70%;
+      float: left;
+}
+
+a:link, a:visited {
+  display: inline-block;
+  //font-size: 15px;
+  //color: #000000;
+  text-decoration: none;
+}
+
+.col-lg-4 a:hover {
+  // background: #BBBBBB;
+  text-decoration: none;
+  /* cursor: default;
+  padding: 0 14px;
+  line-theheight: 2em; */
+}

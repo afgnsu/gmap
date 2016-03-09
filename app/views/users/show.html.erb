@@ -1,0 +1,15 @@
+<div class='col-lg-6 col-lg-offset-3'>
+<table class='table table-hover'>
+<tr><td><strong>姓名</strong></td><td><%= @user.name %></td></tr>
+<tr><td><strong>Email</strong></td><td><%= @user.email %></td></tr>
+<tr><td><strong>權限</strong></td><td><%= @user.role.name %></td></tr>
+<tr><td><strong>用戶建立時間</strong></td><td><%= @joined_on %></td></tr>
+<tr><td><strong>最後登入時間</strong></td><td><%= @last_login %></td></tr>
+<tr><td><strong>總登入次數</strong></td><td><%= @user.sign_in_count %></td></tr>
+</table>
+
+<% if can? :update, @user %>
+  <%= link_to '修改', edit_user_path(@user), class: 'btn btn-lg btn-primary' %>&nbsp;&nbsp;
+<% end %>
+<%= link_to '返回', users_path, class: 'btn btn-lg btn-default' %>
+</div>

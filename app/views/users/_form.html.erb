@@ -1,0 +1,35 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name, '姓名' %><br>
+    <%= f.text_field :name, placeholder: '請輸入英文' %>
+  </div>
+
+  <div class="field"><%= f.label :email %><br><%= f.text_field :email %></div>
+
+  <div class="field">
+    <%= f.label :role_id, '權限' %><br>
+    <%# f.text_field :role_id %>
+    <%= collection_select(:user, :role_id, Role.all, :id, :name, {prompt: '請選擇'}) %>
+  </div>
+
+  <div class="field"><%= f.label :password, '密碼' %><br><%= f.password_field :password, placeholder: "如果不修改請留空" %></div>
+
+
+  <br>
+  <div class="actions">
+    <%= f.submit '送出', class: 'btn btn-lg btn-primary' %>&nbsp;&nbsp;<%= link_to '返回', users_path, class: 'btn btn-lg btn-default' %>
+
+  </div>
+<% end %>

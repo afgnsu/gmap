@@ -1,0 +1,25 @@
+<h1><i class='fa fa-star'></i>&nbsp;最新活動</h1>
+
+<table class='table table-hover'>
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td class='col-lg-6 col-md-12 col-xs-12'><%= image_tag event.photo.large, class: 'img-responsive' %></td>
+        <td><h3><%= link_to "#{event.title} - #{event.shop.name}", event, style: 'color:#095096;' %></h3><%= event.content %><br><br>
+        <p style='text-align: right;'>活動截止日：<font color='#095096'><%= event.end %></font>&nbsp;&nbsp;&nbsp;
+        <% if user_signed_in? %>
+          <%= link_to '編輯', edit_event_path(event), class: 'btn btn-xs btn-warning' %>&nbsp;
+          <%= link_to '刪除', event, method: :delete, data: { confirm: '確定要刪除？' }, class: 'btn btn-xs btn-danger' %>
+        <% end %>
+        </p></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= paginate @events %>
+
+<% if user_signed_in? %>
+<%= link_to '新增最新活動', new_event_path, class: 'btn btn-lg btn-primary' %>
+<% end %>

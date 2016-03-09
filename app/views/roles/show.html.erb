@@ -1,0 +1,13 @@
+<div class='col-lg-6 col-lg-offset-3'>
+<table class='table table-hover'>
+<tr><td><strong>名稱</strong></td><td><%= @role.name %></td></tr>
+<tr><td><strong>說明</strong></td><td><%= @role.description %></td></tr>
+<tr><td><strong>關聯</strong></td><td><%= @assosciated_users %></td></tr>
+</table>
+
+
+<% if can? :update, @role %>
+  <%= link_to '修改', edit_role_path(@role), class: 'btn btn-lg btn-primary' %>&nbsp;&nbsp;
+<% end %>
+<%= link_to '返回', roles_path, class: 'btn btn-lg btn-default' %>
+</div>
